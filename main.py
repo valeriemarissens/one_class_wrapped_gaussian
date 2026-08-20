@@ -1,4 +1,4 @@
-import numpy as np
+from numpy import random
 from pyriemann.datasets import simulated
 from sklearn.metrics import accuracy_score
 
@@ -7,10 +7,9 @@ from OneClassWG import OneClassWrappedGaussian
 
 if __name__ == '__main__':
     # Dummy covariance matrices and dummy y_test
-    rng = np.random.default_rng(7)  # random generator
     cov_train = simulated.make_matrices(n_matrices=50, n_dim=20, kind='spd')
     cov_test = simulated.make_matrices(n_matrices=150, n_dim=20, kind='spd')
-    y_test = rng.choice([-1, 1], size=150)
+    y_test = random.choice([-1, 1], size=150)
 
     # OCRWG
     ocwg = OneClassWrappedGaussian(eps=0.95, cov_diag=True)
